@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
-export { getTask, sendAnswer } from './aidevsAPI';
-export { getModeration, getCompletions } from './gptAPI';
+export { getTask, sendAnswer } from './aidevsAPI'
+export { getModeration, getCompletions } from './gptAPI'

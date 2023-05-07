@@ -28,4 +28,4 @@ module.exports = {
     indent: ['error', 2],
     'max-len': ['warn', { code: 80 }],
   },
-};
+}

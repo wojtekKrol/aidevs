@@ -1,7 +1,7 @@
-const { AI_DEVS_API_KEY, CHAT_GPT_API_KEY } = process.env;
+const { AI_DEVS_API_KEY, CHAT_GPT_API_KEY } = process.env
 
-const AI_DEVS_API_URL = 'https://zadania.aidevs.pl';
-const CHAT_GPT_API_URL = 'https://api.openai.com/v1';
+const AI_DEVS_API_URL = 'https://zadania.aidevs.pl'
+const CHAT_GPT_API_URL = 'https://api.openai.com/v1'
 
 enum AI_DEVS_ENDPOINTS {
   Token = '/token',
@@ -32,4 +32,4 @@ export {
   AI_DEVS_TASKS_ENDPOINTS,
   AI_DEVS_ENDPOINTS,
   HTTP_METHODS,
-};
+}

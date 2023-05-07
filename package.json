@@ -2,7 +2,8 @@
   "name": "aidevs",
   "packageManager": "yarn@3.5.0",
   "scripts": {
-    "start": "nodemon --exec ts-node"
+    "start": "nodemon --exec ts-node",
+    "lint": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "latest",
@@ -18,5 +19,10 @@
   },
   "dependencies": {
     "@types/node": "^18.16.1"
+  },
+  "dependenciesMeta": {
+    "eslint@8.40.0": {
+      "unplugged": true
+    }
   }
 }
