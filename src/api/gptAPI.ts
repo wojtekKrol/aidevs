@@ -1,17 +1,22 @@
 import {
   CHAT_GPT_API_KEY,
-  CHAT_GPT_API_URL,
+  GPT_API_URL,
   GPT_API_ENDPOINTS,
   HTTP_METHODS,
 } from '../consts'
-import { IModerationResponse, ITextCompletionResponse } from './types'
+import {
+  IChatCompletionResponse,
+  IModerationResponse,
+  ITextCompletionResponse,
+  IChatCompletionRequestBody,
+} from './types'
 
-const request = async <TResponse>(
+const request = async <TResponse, TBody = Record<string, any>>(
   endpoint: GPT_API_ENDPOINTS,
   method = HTTP_METHODS.Get,
-  body: Record<string, any> | null = null,
+  body: TBody,
 ): Promise<TResponse> => {
-  const response = await fetch(`${CHAT_GPT_API_URL}${endpoint}`, {
+  const response = await fetch(`${GPT_API_URL}${endpoint}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
@@ -39,13 +44,19 @@ const getModeration = async (input: string | string[]) => {
 }
 
 const getCompletions = async (prompt: string | string[]) => {
-  const response = await request<ITextCompletionResponse>(
+  return await request<ITextCompletionResponse>(
     GPT_API_ENDPOINTS.Completions,
     HTTP_METHODS.Post,
     { model: 'text-davinci-003', prompt },
   )
-
-  return response.choices[0].text.trim()
 }
 
-export { getModeration, getCompletions }
+const getCompletionsGPT4 = async (body: IChatCompletionRequestBody) => {
+  return await request<IChatCompletionResponse, IChatCompletionRequestBody>(
+    GPT_API_ENDPOINTS.ChatCompletions,
+    HTTP_METHODS.Post,
+    body,
+  )
+}
+
+export { getModeration, getCompletions, getCompletionsGPT4 }

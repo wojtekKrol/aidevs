@@ -3,4 +3,4 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export { getTask, sendAnswer } from './aidevsAPI'
-export { getModeration, getCompletions } from './gptAPI'
+export { getModeration, getCompletions, getCompletionsGPT4 } from './gptAPI'

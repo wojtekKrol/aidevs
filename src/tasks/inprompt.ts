@@ -5,10 +5,10 @@ import { AI_DEVS_TASKS_ENDPOINTS } from '../consts'
     AI_DEVS_TASKS_ENDPOINTS.Inprompt,
   )
   const question = taskDescription.question
-  const name = await getCompletions(
+  const completions = await getCompletions(
     `Znajdź imię w pytaniu, a następnie w odpowiedzi zwróć jedynie je: ${question}`,
   )
-
+  const name = completions.choices[0].text.trim()
   if (name.endsWith('.')) {
     name.slice(0, -1)
   }
@@ -19,12 +19,14 @@ import { AI_DEVS_TASKS_ENDPOINTS } from '../consts'
     row => regex.test(row),
   )
 
-  const answer = await getCompletions(`
+  const answerCompletions = await getCompletions(`
     Odpowiedz na pytanie na podstawie kontekstu: ${question}
     ### kontekst
     ${nameCorrelatedQuestions[0]}
     ### /kontekst
   `)
+
+  const answer = answerCompletions.choices[0].text.trim()
 
   const response = await sendAnswer(token, answer)
 
