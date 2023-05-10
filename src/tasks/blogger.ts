@@ -1,7 +1,10 @@
-import { getCompletionsGPT4, getModeration, getTask, sendAnswer } from '../api'
-import { AI_DEVS_TASKS_ENDPOINTS, ROLE, CHAT_MODEL } from '../consts'
-
-import { IChatCompletionRequestBody } from '../api/types'
+import { getTask, sendAnswer } from '../api'
+import { AI_DEVS_TASKS_ENDPOINTS, ROLE } from '../consts'
+import {
+  IChatCompletionRequestBody,
+  IChatCompletionResponse,
+} from '../api/types'
+import { getAnswerGPT4 } from '../helpers'
 ;(async () => {
   const { token, taskDescription } = await getTask(
     AI_DEVS_TASKS_ENDPOINTS.Blogger,
@@ -30,29 +33,14 @@ import { IChatCompletionRequestBody } from '../api/types'
     },
   ]
 
-  const dataForModerationCheck = messages.reduce((arr, { content }) => {
-    arr.push(content)
-    return arr
-  }, [] as string[])
+  let answer = await getAnswerGPT4(messages)
 
-  const moderationResult = await getModeration(dataForModerationCheck)
+  if (answer !== 'Moderation failed') {
+    answer = JSON.parse(
+      (answer as IChatCompletionResponse).choices[0].message.content,
+    ) as string
 
-  if (!moderationResult.includes(1)) {
-    const model = CHAT_MODEL.GPT_4
-
-    const body: IChatCompletionRequestBody = {
-      model,
-      messages,
-    }
-
-    try {
-      const response = await getCompletionsGPT4(body)
-      const result = JSON.parse(response.choices[0].message.content)
-
-      const answerResult = await sendAnswer(token, result)
-      console.log(answerResult)
-    } catch (e) {
-      console.log('Error: ', e)
-    }
+    const answerResult = await sendAnswer(token, answer)
+    console.log(answerResult)
   }
 })()

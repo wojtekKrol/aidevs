@@ -4,7 +4,11 @@ import {
   AI_DEVS_ENDPOINTS,
   HTTP_METHODS,
 } from '../consts'
-import { IAuthorizeResponse, ITaskResponse } from './types'
+import {
+  IAuthorizeResponse,
+  ITaskDescriptionResponse,
+  ITaskResponse,
+} from './types'
 
 const fetchData = async <TResponse>(
   endpoint: string,
@@ -36,7 +40,7 @@ const authorize = (taskName: string) =>
 
 const getTask = async (taskName: string) => {
   const { token } = await authorize(taskName)
-  const taskDescription = await fetchData<ITaskResponse>(
+  const taskDescription = await fetchData<ITaskDescriptionResponse>(
     `${AI_DEVS_ENDPOINTS.Task}/${token}`,
   )
 
@@ -44,8 +48,12 @@ const getTask = async (taskName: string) => {
 }
 
 const sendAnswer = (token: string, answer: string | string[] | number[]) =>
-  fetchData(`${AI_DEVS_ENDPOINTS.Answer}/${token}`, HTTP_METHODS.Post, {
-    answer,
-  })
+  fetchData<ITaskResponse>(
+    `${AI_DEVS_ENDPOINTS.Answer}/${token}`,
+    HTTP_METHODS.Post,
+    {
+      answer,
+    },
+  )
 
-export { getTask, sendAnswer }
+export { getTask, sendAnswer, fetchData }

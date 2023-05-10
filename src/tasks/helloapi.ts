@@ -1,8 +1,8 @@
 import { getTask, sendAnswer } from '../api'
 import { AI_DEVS_TASKS_ENDPOINTS } from '../consts'
-import { ITaskResponse } from '../api/types'
+import { ITaskDescriptionResponse } from '../api/types'
 
-interface IHelloApiResponse extends ITaskResponse {
+interface IHelloApiResponse extends ITaskDescriptionResponse {
   cookie: string
 }
 

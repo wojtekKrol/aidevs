@@ -4,12 +4,17 @@ interface IAuthorizeResponse extends Response {
   token: string
 }
 
-interface ITaskResponse extends Response {
+interface ITaskDescriptionResponse extends Response {
   code: number
   msg: string
   input: string | string[]
   question?: string | undefined
   blog?: string | undefined
+}
+interface ITaskResponse extends Response {
+  code: number
+  msg: string
+  note: string
 }
 
 interface IModerationCategories {
@@ -113,6 +118,7 @@ export {
   IChatCompletionRequestBody,
   ITextCompletionResponse,
   IAuthorizeResponse,
+  ITaskDescriptionResponse,
   ITaskResponse,
   IModerationResponse,
 }

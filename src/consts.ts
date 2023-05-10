@@ -13,6 +13,7 @@ enum AI_DEVS_TASKS_ENDPOINTS {
   Moderation = '/moderation',
   HelloApi = '/helloapi',
   Blogger = '/blogger',
+  Scraper = '/scraper',
 }
 enum GPT_API_ENDPOINTS {
   Moderations = '/moderations',
