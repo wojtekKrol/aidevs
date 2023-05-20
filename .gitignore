@@ -13,3 +13,18 @@
 .env
 .idea
 .vscode
+build
+
+# .gitignore
+
+# Ignore the dist directory:
+dist/
+
+# Ignore the public/dist directory (if it exists):
+public/dist/
+
+# Ignore the Parcel cache directory:
+.parcel-cache/
+
+# Database
+database.db

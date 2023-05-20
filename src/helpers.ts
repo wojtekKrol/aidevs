@@ -23,7 +23,7 @@ const getAnswer = (model: CHAT_MODEL = CHAT_MODEL.GPT_4) => {
         console.log('Error: ', e)
       }
     }
-    return 'Moderation failed'
+    throw new Error('Moderation failed')
   }
 }
 

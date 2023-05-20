@@ -25,7 +25,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-undef': 'error',
     'no-trailing-spaces': 'error',
-    indent: ['error', 2],
+    indent: ['error', 2, { SwitchCase: 1 }],
     'max-len': ['warn', { code: 80 }],
   },
 }

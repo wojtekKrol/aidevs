@@ -33,14 +33,10 @@ import { getAnswerGPT4 } from '../helpers'
     },
   ]
 
-  let answer = await getAnswerGPT4(messages)
+  const response = await getAnswerGPT4(messages)
 
-  if (answer !== 'Moderation failed') {
-    answer = JSON.parse(
-      (answer as IChatCompletionResponse).choices[0].message.content,
-    ) as string
+  const answer = response.choices[0].message.content
 
-    const answerResult = await sendAnswer(token, answer)
-    console.log(answerResult)
-  }
+  const answerResult = await sendAnswer(token, answer)
+  console.log(answerResult)
 })()

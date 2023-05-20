@@ -1,9 +1,6 @@
 import { getTask, sendAnswer } from '../api'
 import { AI_DEVS_TASKS_ENDPOINTS, ROLE } from '../consts'
-import {
-  IChatCompletionRequestBody,
-  IChatCompletionResponse,
-} from '../api/types'
+import { IChatCompletionRequestBody } from '../api/types'
 import { getAnswerGPT4, scrapDataFromUrl } from '../helpers'
 
 const scraper = async () => {
@@ -24,14 +21,12 @@ const scraper = async () => {
     },
   ]
 
-  let answer = await getAnswerGPT4(messages)
+  const response = await getAnswerGPT4(messages)
 
-  if (answer !== 'Moderation failed') {
-    answer = (answer as IChatCompletionResponse).choices[0].message.content
+  const answer = response.choices[0].message.content
 
-    const answerResult = await sendAnswer(token, answer)
-    console.log(answerResult)
-  }
+  const answerResult = await sendAnswer(token, answer)
+  console.log(answerResult)
 }
 
 scraper()

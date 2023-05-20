@@ -112,8 +112,15 @@ interface IChatCompletionResponse {
     total_tokens: number
   }
 }
+interface IDBRow {
+  action: string
+  original_message: string
+  entities: string
+  relationships: string
+}
 
 export {
+  IDBRow,
   IChatCompletionResponse,
   IChatCompletionRequestBody,
   ITextCompletionResponse,
